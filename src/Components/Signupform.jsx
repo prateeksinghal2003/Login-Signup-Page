@@ -7,12 +7,26 @@ import { useNavigate } from "react-router-dom";
 const Signupform =(props)=>
 {
     const setIsLoggedIn = props.setIsLoggedIn;
+    const setpasswordData =props.setpasswordData; 
+    const passwordData = props.passwordData;
+    const setemail =props.setemail;
+
 
     const navigate = useNavigate();
+    
+    //useNavigate() → gives you the power to move between pages using code.
+    // navigate("/something") → moves user to that page.
+    // Why it's needed:
+    // Sometimes after actions (like login, logout, form submit), you want to redirect the user — without them clicking anything.
+    // That's where navigate() is super useful.
+
+
   
     const [showCreatePass, setshowCreatePass] = useState(false);
     const [showConfirmPass, setshowConfirmPass] = useState(false);
     const [accountType, setaccountType] = useState("student");
+    
+
   
     const [formData, setformData] = useState({
       firstName: "",
@@ -43,6 +57,18 @@ const Signupform =(props)=>
       )  
     }
 
+
+// event is the object that comes when user types in an input field.
+// event.target.name → gets the name of the input field.
+
+// (for example: "email", "password", etc.)
+
+// event.target.value → gets the value typed by the user.
+// setformData((prev) => {...})
+// prev = previous form data (already filled values).
+// { ...prev } → copies all the old form data.
+// [event.target.name]: event.target.value → updates the field where the user typed.
+
     // function changeHandler(event)
     // {
     //   setformData((prev)=>
@@ -57,6 +83,7 @@ const Signupform =(props)=>
   
     function submitHandler(e) 
     {
+      //e.preventDefault() → stops the form from refreshing the page (default form behavior).
       e.preventDefault();
       console.log(formData.password)
       console.log(formData.confirmPassword)
@@ -65,6 +92,9 @@ const Signupform =(props)=>
         return;
       }
   
+      setpasswordData(formData.password);
+      setemail(formData.email);
+      console.log(passwordData);
       setIsLoggedIn(true);
       toast.success("Account Create");
 
@@ -89,6 +119,7 @@ const Signupform =(props)=>
   
     return (
       <div >
+
         <div className="flex bg-richblack-800 p-1 gap-x-1 rounded-full max-w-max">
           <button
             
@@ -96,7 +127,7 @@ const Signupform =(props)=>
               accountType === "student"
                 ? "bg-richblack-900 text-richblack-5"
                 : "bg-transparent text-richblack-200 "} py-2 px-5 rounded-full transition-all duration-200`}
-
+                                    
                 onClick={() => setaccountType("student")}
           >
             Student
@@ -114,32 +145,45 @@ const Signupform =(props)=>
           </button>
         </div>
 
-  
+{/*   
+        The onSubmit will be triggered when:
+        The user clicks the "Create Account" button (because it has type="submit" by default).
+
+The user presses the "Enter" key while focused inside any input field.
+When a user is typing in one of the fields (e.g., First Name, Last Name, Email, Password), 
+and presses Enter, the form will be submitted, which will also trigger the submitHandler. */}
+
         <form onSubmit={submitHandler}>
 
         {/* this div contains first name and last name */}
         
           <div className="flex gap-x-4 mt-4">
+
+
+             {/* for label---> don't worry */}
             <label htmlFor="" className="w-full">
+
               <p className="text-[0.875rem] text-richblack-5 mb-1 leading-[1.375rem]">
                 First Name <sup className="text-pink-200">*</sup>
               </p>
 
-              <input
+              <input 
                 type="text"
-                required
-                placeholder="Enter First Name"
-                onChange={changeHandler}
+                required  
+                placeholder="Enter First Name" 
+                onChange={changeHandler} 
                 value={formData.firstName}
                 name="firstName"
                 className="bg-richblack-800 rounded-[0.75rem] w-full p-[12px] text-richblack-5"
               />
-            </label>
+            </label>  
   
             <label htmlFor="" className="w-full">
+
               <p className="text-[0.875rem] text-richblack-5 mb-1 leading-[1.375rem]">
                 Last Name <sup className="text-pink-200">*</sup>
               </p>
+
               <input
                 type="text"
                 required
@@ -151,6 +195,7 @@ const Signupform =(props)=>
               />
             </label>
           </div>
+
   
           <label htmlFor="" className="w-full">
           <div className="mt-4"></div>
@@ -172,10 +217,11 @@ const Signupform =(props)=>
           </label>
           
   
+          {/* this div is for passwords */}
           <div className="flex gap-x-4 w-full mt-4">
+          
             <label htmlFor= "" className="w-full relative">
-            
-              <p className="text-[0.875rem] text-richblack-5 mb-1 leading-[1.375rem]">
+            <p className="text-[0.875rem] text-richblack-5 mb-1 leading-[1.375rem]">
                 Create Password
                 <sup className="text-pink-200">*</sup>
               </p>
@@ -199,6 +245,7 @@ const Signupform =(props)=>
                   <AiOutlineEye fontSize={24} fill="#AFB2BF" />
                 )}
               </span>
+
             </label>
   
             <label htmlFor="" className="w-full relative">

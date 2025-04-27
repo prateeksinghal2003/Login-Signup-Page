@@ -2,7 +2,7 @@ import React from "react";
 import Template from "../Components/Template";
 import loginImg from "../assets/loginimg.jpg";
 
-function Login({ setIsLoggedIn }) {
+function Login({ setIsLoggedIn , setpasswordData, passwordData , email}) {
   return (
     <Template
       title="Welcome Back"
@@ -11,6 +11,9 @@ function Login({ setIsLoggedIn }) {
       image={loginImg}
       formType="login"
       setIsLoggedIn={setIsLoggedIn}
+      setpasswordData={setpasswordData}
+      passwordData={passwordData}
+      email ={email}
     />
   );
 }

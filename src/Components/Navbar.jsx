@@ -14,16 +14,17 @@ const Navbar=(props)=>
         <img src={logo} height={32} width={160} loading="lazy" className="rounded-md"/>
       </Link>
 
+      {/* gap-x-6 ->Add horizontal gap (space) of 1.5rem  */}
       <nav>
         <ul className="flex gap-x-6 text-richblack-100">
           <li>
             <Link to="/">Home</Link>
           </li>
           <li>
-            <Link to="/">About</Link>
+            <Link to="/about">About</Link>
           </li>
           <li>
-            <Link to="/">Contact</Link>
+            <Link to="/contact">Contact</Link>
           </li>
         </ul>
       </nav>
@@ -45,6 +46,7 @@ const Navbar=(props)=>
             </button>
           </Link>
         )}
+
         {isLoggedIn && (
           <Link to="/">
             <button
@@ -58,6 +60,7 @@ const Navbar=(props)=>
             </button>
           </Link>
         )}
+        
         {isLoggedIn && (
           <Link to="/dashboard">
             <button className="bg-richblack-800 py-[8px] px-[12px] rounded-[8px] border border-richblack-700">

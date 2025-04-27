@@ -1,1 +1,7 @@
 /* write your css here */
+body {
+    overflow: hidden;
+    height: 100vh; 
+     /* Ensure it takes up the full viewport height */
+  }
+  

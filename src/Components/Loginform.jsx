@@ -9,6 +9,9 @@ const Loginform=(props)=>
 {
     
     const setIsLoggedIn = props.setIsLoggedIn;
+    const setpasswordData = props.setpasswordData;
+    const passwordData = props.passwordData;
+    const email = props.email;
 
     const navigate = useNavigate();
 
@@ -19,22 +22,54 @@ const Loginform=(props)=>
         password: "",
     });
 
-    function changeHandler(event) {
-        setFormData([
-            (prev) => [
-                {
-                    ...prev,
-                    [event.target.name]: event.target.value,
-                },
-            ],
-        ]);
+    // function changeHandler(event) {
+    //     setFormData([
+    //         (prev) => [
+    //             {
+    //                 ...prev,
+    //                 [event.target.name]: event.target.value,
+    //             },
+    //         ],
+    //     ]);
+    // }
+
+    
+    function changeHandler(event) 
+    {
+       setFormData((prev)=>
+       (
+        {
+          ...prev,[event.target.name]: event.target.value
+        }
+      )
+      
+      )  
     }
 
     function submitHandler(e) {
         e.preventDefault();
+
+    //   console.log(passwordData);
+    //   console.log(formData);
+    //   console.log("Herrrrrrree");
+
+       
+      if(passwordData!== formData.password)
+      {
+        toast.error("Login and sign up passwords do not match");
+      }
+
+      else if(email!== formData.email)
+      {
+        toast.error("Login and sign up email do not match");
+      }
+
+      else{
+
         setIsLoggedIn(true);
         toast.success("Login Success");
         navigate("/dashboard");
+      }
     }
 
     return (
@@ -62,14 +97,14 @@ const Loginform=(props)=>
             </label>
 
 
-            {/* this label is marker relative for image of an eye */}
+            {/* this label is marked relative for image of an eye */}
             <label className="w-full relative">
                 <p className="text-[0.875rem] text-richblack-5 mb-1 leading-[1.375rem]">
                     Password
                     <sup className="text-pink-200">*</sup>
                 </p>
 
-               {/* password field behaving like input field or text field */}
+               {/* password field behaving like password field or text field */}
                 <input
                     
                     type={showPassword ? "text" : "password"}
@@ -92,7 +127,7 @@ const Loginform=(props)=>
                 </Link>
             </label>
 
-            <button className="bg-yellow-50 py-[8px] px-[12px] rounded-[8px] mt-6 font-medium text-richblack-900">Sign in</button>
+            <button className="bg-yellow-50 py-[8px] px-[12px] rounded-[8px] mt-6 font-medium text-richblack-900">Login</button>
         </form>
     );
 }
