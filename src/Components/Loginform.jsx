@@ -53,8 +53,12 @@ const Loginform=(props)=>
     //   console.log(formData);
     //   console.log("Herrrrrrree");
 
+    if(passwordData === "" || email ==="")
+    {
+        toast.error("You must signup first");
+    }
        
-      if(passwordData!== formData.password)
+      else if(passwordData!== formData.password)
       {
         toast.error("Login and sign up passwords do not match");
       }
